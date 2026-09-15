@@ -1,0 +1,21 @@
+node_modules
+.next
+.npm-cache
+out
+*.log
+*.tsbuildinfo
+.DS_Store
+
+# Local credentials and deployment state
+.env
+.env.*
+!.env.example
+.vercel
+*.pem
+*.key
+
+# Local design references, exports, and agent tooling
+.agents/
+参考图:我的设计/
+参考图:Hasselblad Phocus/
+Remote Shooting Demo — *.png

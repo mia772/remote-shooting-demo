@@ -1,0 +1,462 @@
+.cameraApp {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
+  font-variant-numeric: tabular-nums;
+  isolation: isolate;
+}
+
+.cameraApp button {
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  touch-action: manipulation;
+}
+
+.cameraApp button:focus-visible,
+.liveView:focus-visible,
+.evPanel input:focus-visible,
+.kelvinPanel input:focus-visible {
+  outline: 1.5px solid #e1011a;
+  outline-offset: 1px;
+}
+
+.topChrome {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  height: 172px;
+  background: #000;
+}
+
+.systemBar {
+  position: relative;
+  height: 47px;
+}
+
+.systemBar time {
+  position: absolute;
+  top: 15px;
+  left: 29.12px;
+  width: 40px;
+  font-size: 15.6px;
+  font-weight: 600;
+  line-height: 15.6px;
+  white-space: nowrap;
+}
+
+.systemIcons {
+  position: absolute;
+  top: 15px;
+  right: 15.6px;
+  display: block;
+  width: 68.64px;
+  height: 16px;
+}
+
+.systemIcons img { position: absolute; display: block; object-fit: contain; }
+.systemIcons img:nth-child(1) { top: 3.12px; left: 0; width: 17.16px; height: 11.44px; }
+.systemIcons img:nth-child(2) { top: 1.84px; left: 22.32px; width: 16.71px; height: 12.2px; }
+.systemIcons img:nth-child(3) { top: 3.12px; left: 43.16px; width: 25.48px; height: 11.44px; }
+
+.cameraBar { position: relative; height: 44px; }
+
+.closeButton {
+  position: absolute;
+  top: 7px;
+  left: 24px;
+  z-index: 2;
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.closeButton img { display: block; width: 16px; height: 16px; }
+
+.batteryReadout {
+  position: absolute;
+  top: 12px;
+  left: 56px;
+  display: flex;
+  height: 19px;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 13px;
+  white-space: nowrap;
+}
+
+.cameraBattery { position: relative; display: block; width: 24px; height: 12px; }
+.cameraBattery::before { position: absolute; inset: 0 3.7px 0 0; border: 1.5px solid #fff; border-radius: 2px; content: ""; }
+.cameraBattery::after { position: absolute; top: 4px; right: 2.6px; width: 1.2px; height: 4.8px; border-radius: 4px; background: #fff; content: ""; }
+.cameraBattery i:first-child { position: absolute; top: 3px; left: 3px; width: 14.28px; height: 6px; border-radius: 1px; background: #fff; }
+
+.telemetryDivider { position: absolute; top: 16px; left: 123px; width: 1px; height: 12px; background: #818181; }
+.capacityReadout { position: absolute; top: 15px; left: 136px; color: #fff; font-size: 12px; font-weight: 400; line-height: 13px; white-space: nowrap; }
+
+.topControlGroup {
+  position: absolute;
+  top: 6px;
+  left: 292px;
+  display: grid;
+  width: 90px;
+  height: 32px;
+  grid-template-columns: repeat(3, 30px);
+  border-radius: 50px;
+  background: #1f1f1f;
+}
+
+.topControlGroup button {
+  display: grid;
+  width: 30px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.topControlGroup button:first-child img { width: 15px; height: 16px; }
+.topControlGroup button:nth-child(2) img { width: 16px; height: 16px; }
+.topControlGroup button:nth-child(3) img { width: 15.5px; height: 15.5px; }
+.topControlGroup button:active,
+.topControlActive { background: #494949 !important; }
+
+.topNotice {
+  position: absolute;
+  top: 103px;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: center;
+}
+
+.liveViewStage { position: absolute; top: 172px; left: 0; z-index: 2; width: 390px; height: 295px; }
+
+.liveView {
+  position: relative;
+  width: 390px;
+  height: 295px;
+  overflow: hidden;
+  background: #161616;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+
+.liveViewUnavailable { cursor: default; }
+.liveViewTransform { position: absolute; inset: 0; display: block; transform-origin: 50% 50%; transition: transform 100ms ease-out; }
+.liveViewImage { position: absolute; top: -102px; left: 0; display: block; width: 390px; height: 487px; max-width: none; object-fit: cover; pointer-events: none; user-select: none; }
+.liveViewUnavailable .liveViewImage { opacity: .4; }
+
+.gridOverlay,
+.captureFlash,
+.connectionOverlay { position: absolute; inset: 0; }
+.gridOverlay { z-index: 2; pointer-events: none; }
+.gridOverlay i { position: absolute; display: block; background: rgb(255 255 255 / 22%); }
+.gridOverlay i:nth-child(1), .gridOverlay i:nth-child(2) { top: 0; bottom: 0; width: 1px; }
+.gridOverlay i:nth-child(1) { left: 33.333%; }
+.gridOverlay i:nth-child(2) { left: 66.666%; }
+.gridOverlay i:nth-child(3), .gridOverlay i:nth-child(4) { right: 0; left: 0; height: 1px; }
+.gridOverlay i:nth-child(3) { top: 33.333%; }
+.gridOverlay i:nth-child(4) { top: 66.666%; }
+
+.focusTarget {
+  position: absolute;
+  z-index: 4;
+  display: block;
+  width: 36px;
+  height: 36px;
+  transform: translate(-50%, -50%);
+  transition: left 100ms ease-out, top 100ms ease-out, filter 100ms ease-out;
+  pointer-events: none;
+}
+
+.focusTargetActive { filter: brightness(0) saturate(100%) invert(13%) sepia(99%) saturate(6313%) hue-rotate(348deg) brightness(88%) contrast(106%); }
+
+.zoomRail {
+  position: absolute;
+  top: 249px;
+  left: 176px;
+  z-index: 6;
+  display: grid;
+  width: 104.14px;
+  height: 38px;
+  grid-template-columns: repeat(3, 38px);
+}
+
+.zoomRail button {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  cursor: pointer;
+}
+.zoomRail .zoomSelected { background: #373634; }
+.zoomRail button:disabled { opacity: .45; }
+
+.countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 8;
+  color: #fff;
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 80%);
+  transform: translate(-50%, -50%);
+}
+
+.recordingStatus,
+.feedback {
+  position: absolute;
+  z-index: 8;
+  padding: 5px 8px;
+  background: rgb(0 0 0 / 68%);
+  font-size: 11px;
+  line-height: 1;
+}
+.recordingStatus { top: 10px; left: 10px; display: flex; align-items: center; gap: 6px; letter-spacing: .06em; }
+.recordingStatus i { width: 7px; height: 7px; border-radius: 50%; background: #e1011a; }
+.feedback { top: 10px; right: 10px; max-width: 200px; border-left: 2px solid #e1011a; }
+.captureFlash { z-index: 7; background: transparent; pointer-events: none; transition: background 90ms ease-out; }
+.captureFlashVisible { background: rgb(255 255 255 / 38%); }
+.connectionOverlay { z-index: 9; display: grid; place-items: center; background: rgb(0 0 0 / 55%); color: rgb(255 255 255 / 72%); font-size: 14px; }
+
+.modeBadge {
+  position: absolute;
+  top: 542px;
+  left: 176px;
+  z-index: 4;
+  display: grid;
+  width: 37.333px;
+  height: 28px;
+  place-items: center;
+  padding: 0;
+  border-radius: 0;
+  background: #fff !important;
+  color: #000 !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  line-height: 28px !important;
+  cursor: pointer;
+}
+.modeBadge:disabled { cursor: not-allowed; opacity: .48; }
+
+.parameterRow { position: absolute; top: 611px; left: 0; z-index: 4; width: 390px; height: 49px; }
+.parameter { position: absolute; top: 0; display: flex; height: 49px; flex-direction: column; align-items: center; padding: 0; background: transparent; cursor: pointer; }
+.isoParameter { left: 24px; width: 43px; }
+.evParameter { left: 117px; width: 40px; }
+.shutterParameter { left: 199px; width: 86px; }
+.wbParameter { left: 319px; width: 55px; }
+.parameter > span:first-child { color: #818181; font-size: 13px; font-weight: 500; line-height: 13px; white-space: nowrap; }
+.parameter strong { display: flex; height: 30px; align-items: center; justify-content: center; margin-top: 5px; color: #fff; font-size: 22px; font-weight: 500; letter-spacing: -.025em; line-height: 30px; white-space: nowrap; }
+.aMode .parameter strong,
+.aMode .parameter > span:first-child { color: #818181; }
+.aMode .wbParameter strong { opacity: .52; }
+.wbValue { width: 38px; margin-top: 2px !important; }
+.wbValue img { display: block; max-width: 27.5px; max-height: 26px; }
+.wbValue .kelvinGlyph { font-size: 17px; }
+
+.filterButton {
+  position: absolute;
+  top: 737px;
+  left: 293px;
+  z-index: 4;
+  display: block;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.filterButton img { position: absolute; inset: -1px; display: block; width: 36px; height: 36px; }
+
+.shutterButton {
+  position: absolute;
+  top: 720px;
+  left: 161px;
+  z-index: 4;
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.shutterButton img { display: block; width: 68px; height: 68px; }
+.shutterButton:active { transform: scale(.97); }
+.shutterButton:disabled { cursor: wait; opacity: .72; }
+.shutterRecording { border: 2px solid #636363 !important; background: #1c1c1c !important; }
+.shutterRecording span { width: 28px; height: 28px; border-radius: 2px; background: #e1011a; }
+
+.captureModes { position: absolute; top: 798px; left: 176px; z-index: 4; display: grid; grid-template-columns: repeat(2, 44px); }
+.captureModes.videoSelected { left: 129px; }
+.captureModes button { width: 44px; height: 36px; padding: 10px 0 16px; background: transparent; color: #818181; font-size: 10px; font-weight: 400; line-height: 10px; cursor: pointer; }
+.captureModes .captureModeSelected { color: #fff; }
+
+.dismissLayer { position: absolute; inset: 0; z-index: 20; padding: 0; background: transparent; cursor: default; }
+
+.quickMenu {
+  position: absolute;
+  top: 103px;
+  z-index: 22;
+  display: flex;
+  height: 64px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+.quickMenu p { height: 15px; margin: 0; font-size: 15px; font-weight: 400; line-height: 15px; }
+.quickMenu > div { display: grid; height: 30px; padding: 2px; border-radius: 36px; background: #1f1f1f; }
+.gestureMenu { left: 103px; width: 184px; }
+.gestureMenu > div { width: 184px; grid-template-columns: repeat(4, 45px); }
+.flashMenu { left: 120px; width: 150px; }
+.flashMenu > div { width: 150px; grid-template-columns: repeat(3, 49px); }
+.quickMenu button { min-width: 0; padding: 0 7px; border-radius: 30px; background: transparent; color: #fff; font-size: 12px; cursor: pointer; }
+.quickSelected { background: #494949 !important; color: #fff !important; }
+
+.settingsPanel {
+  position: absolute;
+  top: 459px;
+  left: 0;
+  z-index: 22;
+  width: 390px;
+  height: 385px;
+  overflow: hidden;
+  border-radius: 22px 22px 0 0;
+  background: #000;
+}
+.sheetHandle { position: absolute; top: 12px; left: 175px; width: 40px; height: 4px; border-radius: 31px; background: #3b3b39; }
+.settingsRow { position: absolute; left: 0; width: 390px; height: 88px; border-bottom: 1px solid #141414; }
+.timerRow { top: 40px; }
+.gridRow { top: 128px; }
+.settingsRow > span { position: absolute; top: 35px; left: 18px; display: flex; height: 19px; align-items: center; gap: 10px; color: #fff; font-size: 15px; font-weight: 400; line-height: 15px; white-space: nowrap; }
+.settingsRow > span img { display: block; width: 16px; height: 19px; object-fit: contain; }
+.gridRow > span { left: 17px; }
+.gridRow > span img { width: 18px; height: 18px; }
+.segmented { position: absolute; top: 28px; left: 212px; display: grid; width: 162px; height: 32px; grid-template-columns: repeat(4, 40px); padding: 2px; border-radius: 36px; background: #1f1f1f; }
+.segmented button { display: grid; width: 40px; height: 28px; place-items: center; padding: 0; border-radius: 30px; background: transparent; color: #fff; font-size: 15px; cursor: pointer; }
+.segmentSelected { background: #494949 !important; }
+.offGlyph { position: relative; display: block; width: 14px; height: 14px; border: 1.5px solid #fff; border-radius: 50%; }
+.offGlyph::after { position: absolute; top: 5.25px; left: -.2px; width: 13px; height: 1.5px; background: #fff; content: ""; transform: rotate(-45deg); transform-origin: center; }
+.switch { position: absolute; top: 32px; left: 334px; width: 40px; height: 24px; padding: 0; border-radius: 14px !important; background: #3b3b3b !important; cursor: pointer; }
+.switch i { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #818181; transition: transform 100ms ease, background 100ms ease; }
+.switchOn { background: #e1011a !important; }
+.switchOn i { background: #fff; transform: translateX(16px); }
+
+.parameterPanel { position: absolute; top: 532px; left: 0; z-index: 22; width: 390px; height: 63px; overflow: visible; background: #1d1d1d; }
+.parameterWheelFrame { position: relative; width: 390px; height: 63px; overflow: hidden; }
+.parameterWheel {
+  display: flex;
+  width: 390px;
+  height: 63px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 0 156px;
+  cursor: grab;
+  mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+.parameterWheel:active { cursor: grabbing; }
+.parameterWheel::-webkit-scrollbar { display: none; }
+.parameterWheel button {
+  display: grid;
+  min-width: 78px;
+  width: 78px;
+  height: 52px;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  color: #b8b8b8;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  cursor: pointer;
+}
+.parameterWheel .parameterSelected { color: #e1011a; font-size: 22px; font-weight: 500; }
+.wheelIndicator {
+  position: absolute;
+  bottom: 1px;
+  left: 195px;
+  z-index: 3;
+  width: 0;
+  height: 0;
+  border-right: 6.5px solid transparent;
+  border-bottom: 11px solid #e1011a;
+  border-left: 6.5px solid transparent;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.wbOptions { display: flex; width: 390px; height: 63px; align-items: center; overflow-x: auto; padding: 0; scrollbar-width: none; }
+.wbOptions::-webkit-scrollbar,
+.filterOptions::-webkit-scrollbar { display: none; }
+.wbOptions button { display: grid; min-width: 84px; height: 63px; place-items: center; padding: 0; background: transparent; cursor: pointer; }
+.wbOptions button:first-child { min-width: 52px; place-items: center; }
+.wbOptions img { display: block; max-width: 36px; max-height: 36px; }
+.wbOptions .wbSelected img,
+.wbOptions .wbSelected .tungstenGlyph { filter: brightness(0) saturate(100%) invert(13%) sepia(99%) saturate(6313%) hue-rotate(348deg) brightness(88%) contrast(106%); }
+.wbOptions .wbSelected .kelvinGlyph { color: #e1011a; }
+.kelvinGlyph { color: #fff; font-size: 14px; font-weight: 500; line-height: 1; white-space: nowrap; }
+.tungstenGlyph { position: relative; display: block; width: 34px; height: 28px; }
+.tungstenGlyph i:nth-child(1) { position: absolute; top: 13px; left: 0; width: 34px; height: 1.5px; border-radius: 2px; background: #fff; }
+.tungstenGlyph i:nth-child(n+2) { position: absolute; width: 1.5px; height: 7px; border-radius: 2px; background: #fff; }
+.tungstenGlyph i:nth-child(2) { top: 0; left: 7px; transform: rotate(-25deg); }
+.tungstenGlyph i:nth-child(3) { top: 0; right: 7px; transform: rotate(25deg); }
+.tungstenGlyph i:nth-child(4) { bottom: 0; left: 7px; transform: rotate(25deg); }
+.tungstenGlyph i:nth-child(5) { right: 7px; bottom: 0; transform: rotate(-25deg); }
+
+.kelvinPanel { position: relative; display: grid; width: 390px; height: 63px; grid-template-columns: 52px 84px 1fr; align-items: center; padding-right: 16px; }
+.kelvinPanel button { width: 44px; height: 44px; padding: 0; background: transparent; color: #fff; font-size: 30px; cursor: pointer; }
+.kelvinPanel output { color: #e1011a; font-size: 20px; }
+.kelvinPanel input { width: 225px; accent-color: #e1011a; }
+
+.filterName { position: absolute; top: -21px; left: 0; width: 390px; margin: 0; color: #fff; font-size: 13px; line-height: 13px; text-align: center; }
+.filterOptions { display: flex; width: 390px; height: 63px; align-items: center; gap: 10px; overflow-x: auto; padding: 0 10px; scrollbar-width: none; }
+.filterOptions button { position: relative; min-width: 48px; width: 48px; height: 48px; padding: 0; overflow: hidden; border-radius: 4px; background: transparent; cursor: pointer; }
+.filterOptions img { display: block; width: 48px; height: 48px; object-fit: cover; }
+.filterOptions .filterSelected { outline: 1.5px solid #fff; outline-offset: -1.5px; border-radius: 2px; }
+
+.visuallyHidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 389px) {
+  .cameraApp { transform: scale(calc(100vw / 390)); transform-origin: top left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cameraApp *, .cameraApp *::before, .cameraApp *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
